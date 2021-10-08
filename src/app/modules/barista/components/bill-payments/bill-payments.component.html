@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <h4>Bill Details</h4>
+    <table class="table table-bordered">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Item Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Qty</th>
+        <th scope="col">Discount(In Rs)</th>
+        <th scope="col">Offer Applied</th>
+        <th scope="col">Item Total</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let billItem of billArray; let i = index;">
+        <td>{{i + 1}}</td>
+        <td>{{billItem.itemName}}</td>
+        <td class="col-md-2">&#x20B9; {{billItem.price}}</td>
+        <td>{{billItem.qty}}</td>
+        <td>&#x20B9; {{billItem.discount}}</td>
+        <td>{{billItem.offerApplied}}</td>
+        <td>&#x20B9; {{billItem.itemTotal}}</td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="col-lg-3 col-sm-5 ml-auto">
+      <table class="table">
+        <tbody>
+        <tr>
+          <td>
+            <strong class="text-dark">Subtotal</strong>
+          </td>
+          <td class="right">&#x20B9; {{this.subTotal}}</td>
+        </tr>
+        <tr>
+          <td>
+            <strong class="text-dark">Tax 18%</strong>
+          </td>
+          <td>&#x20B9; {{this.taxAmount}}</td>
+        </tr>
+        <tr>
+          <td>
+            <strong class="text-dark">Total</strong></td>
+          <td>
+            <strong class="text-dark">&#x20B9; {{this.total}}</strong>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+  </div>
+<div class="row mt-5 p-4">
+  <form [formGroup]="billForm">
+    <div class="col-md-12 col-sm-12">
+      <div class="form-group">
+        <input formControlName="billAmount" type="text" placeholder="Pay Bill Here" class="form-control">
+      </div>
+    </div>
+  </form>
+    <div class="col-md-3 col-sm-12">
+      <button [disabled]="!billForm.valid" (click)="navigate('orderPlacedSection')" type="button" class="btn btn-sm btn-success mr-2"><a>Pay</a></button>
+      <button (click)="navigate('menuSection')" type="button" class="btn btn-sm btn-success"><a>Back To Edit</a></button>
+    </div>
+</div>

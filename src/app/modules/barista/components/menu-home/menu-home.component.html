@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col header">
+    Barista
+  </div>
+</div>
+<!--Menu Section-->
+<app-menu-items *ngIf="currentView === 'menuSection'"
+                [itemList]="itemList"
+                [comboList]="comboList"
+                (onProceedToBill)="currentView = $event;">
+</app-menu-items>
+<!--Bill Section-->
+<app-bill-payments *ngIf="currentView === 'billSection'"
+                   [itemList]="itemList"
+                   [comboList]="comboList"
+                   (onNavigate)="currentView = $event;">
+</app-bill-payments>
+<!--Order Placed Section-->
+<app-order-placed *ngIf="currentView === 'orderPlacedSection'"
+                  (onNavigate)="currentView = $event; clearData();">
+</app-order-placed>

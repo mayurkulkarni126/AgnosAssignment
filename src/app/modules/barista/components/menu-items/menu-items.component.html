@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-12 col-sm-12">
+    <div class="row">
+      <div class="container-fluid">
+        <div class="row" id="listRow">
+          <div *ngFor="let itemDetails of itemList" class="col-md-4 col-sm-12 mb-3">
+            <div class="card">
+              <img [src]="itemDetails.imageUrl" class="card-img-top img-position img-fluid" alt="">
+              <div class="card-body p-3">
+                <h5 class="card-title text-primary mb-2">{{itemDetails.itemName}}</h5>
+                <h6 class="mb-2">
+                  <span [ngClass]="{'card-text-old-price': itemDetails.discount}">&#x20B9; {{itemDetails.price}}</span>
+                  <span *ngIf="itemDetails.discount"
+                        class="pl-2">&#x20B9; {{itemDetails.price - itemDetails.discount}}</span>
+                </h6>
+                <!--                Offer Section Description-->
+                <!--                Combo Offer-->
+                <span *ngIf="itemDetails.isComboAvailable" (click)="openModal(itemDetails)" class="card-text mb-2">
+                  Combo Available. Click here for details!!
+                </span>
+                <!--                Discount-->
+                <span *ngIf="itemDetails.discount" class="card-text-discount mb-2">
+                  Flat &#x20B9; {{itemDetails.discount}} Discount!!
+                </span>
+                <!--                Free Item-->
+                <span>
+                <span *ngIf="itemDetails.freeItem?.id" class="card-text-free mb-2">
+                  Great Deal!!. Get <b>{{itemDetails.freeItem.name}}</b> free on this!!
+                </span>
+                </span>
+                <!--                No Offer-->
+                <span *ngIf="!itemDetails.discount && !itemDetails.freeItem && !itemDetails.isComboAvailable"
+                      class="mb-2">
+                  Offer Coming Soon!
+                </span>
+                <!--                Offer Section Description End-->
+                <hr>
+                <!--                Qty Section-->
+                <div class="qty-section">
+                <button type="button" (click)="onItemQtyClick(itemDetails, '-')" class="btn btn-sm shadow-none"><a>-</a></button>
+                <span class="text-grey mt-1 mr-1 ml-1">{{itemDetails.qty}}</span>
+                <button type="button" (click)="onItemQtyClick(itemDetails, '+')" class="btn btn-sm shadow-none"><a>+</a></button>
+                </div>
+                <!--                Qty Section End-->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="row">
+  <div class="col-md-12 col-sm-12 p-4 text-center">
+    <button [disabled]="!itemsAdded" (click)="proceedToBillPayment()" type="button" class="btn btn-success"><a>Proceed To Payment</a>
+    </button>
+  </div>
+</div>
